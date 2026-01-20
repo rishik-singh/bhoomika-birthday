@@ -166,10 +166,13 @@
 <div class="screen" id="s6">
   <h2>💖</h2>
   <p>Some things are felt, not said.</p>
-  <p id="moodLine" style="opacity:0.7;"></p>
+
+  <p id="moodLine" style="opacity:0; transition:opacity 1.2s;"></p>
+
   <p id="lastLine" style="opacity:0; transition:opacity 1.5s;">
     And I hope you never forget how special you are 🌸
   </p>
+
   <p style="opacity:0.6;margin-top:10px;">— Rishik</p>
   <div class="hint" onclick="location.reload()">Replay ✨</div>
 </div>
@@ -243,22 +246,26 @@
       state = 6;
       show(6);
 
+      /* ✅ Mood-based message (FIXED) */
+      setTimeout(() => {
+        const hour = new Date().getHours();
+        let moodText = "Hope today feels kind 💖";
+
+        if (hour >= 5 && hour < 12) moodText = "Hope your day starts gently 🌤️";
+        else if (hour >= 12 && hour < 18) moodText = "Hope your afternoon feels light ☁️";
+        else moodText = "Some nights are meant to feel slow 🌙";
+
+        const moodLine = document.getElementById("moodLine");
+        moodLine.innerText = moodText;
+        moodLine.style.opacity = 1;
+      }, 500);
+
       setTimeout(() => {
         document.getElementById("lastLine").style.opacity = 1;
       }, 2000);
 
     }, msgs.length * 900 + 1400);
   }
-
-  // Mood-based message
-  const hour = new Date().getHours();
-  let moodText = "Hope today feels kind 💖";
-
-  if (hour >= 5 && hour < 12) moodText = "Hope your day starts gently 🌤️";
-  else if (hour >= 12 && hour < 18) moodText = "Hope your afternoon feels light ☁️";
-  else moodText = "Some nights are meant to feel slow 🌙";
-
-  document.getElementById("moodLine").innerText = moodText;
 </script>
 
 </body>
