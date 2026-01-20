@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>For Bhoomika 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Poppins:wght@300;400&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #1b1d36, #070714);
+    font-family: 'Poppins', sans-serif;
+    color: #eee;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+  }
+
+  .screen.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    letter-spacing: 3px;
+    color: #ffd6e8;
+    text-shadow: 0 0 20px rgba(255,214,232,0.4);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #ffd6e8;
+    font-size: 2rem;
+  }
+
+  p {
+    color: #cfcfe6;
+    line-height: 1.6;
+    font-size: 1.05rem;
+    margin: 6px 0;
+  }
+
+  .hint {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-top: 12px;
+  }
+
+  .cake {
+    font-size: 4rem;
+    margin-top: 20px;
+  }
+
+  .cake.cut {
+    transform: scale(1.15) rotate(8deg);
+    transition: transform 0.4s ease;
+  }
+
+  .wish {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.2rem;
+    margin-top: 14px;
+    color: #ffd6e8;
+    opacity: 0;
+    animation: fadeUp 1s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Floating elements */
+  .float {
+    position: absolute;
+    bottom: -20px;
+    font-size: 14px;
+    opacity: 0.25;
+    animation: rise linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes rise {
+    to { transform: translateY(-120vh); }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Floating background -->
+<script>
+  const icons = ["✨","💫","🌙","•","💖"];
+  setInterval(() => {
+    const f = document.createElement("div");
+    f.className = "float";
+    f.innerText = icons[Math.floor(Math.random()*icons.length)];
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.animationDuration = (10 + Math.random() * 10) + "s";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 15000);
+  }, 900);
+</script>
+
+<!-- Screens -->
+<div class="screen active" id="s0">
+  <p>Hey… 🌙</p>
+  <p>This is something gentle.</p>
+  <div class="hint">Tap anywhere</div>
+</div>
+
+<div class="screen" id="s1">
+  <p>Some moments don’t need noise.</p>
+</div>
+
+<div class="screen" id="s2" onclick="secretTap()">
+  <div class="name">BHOOMIKA</div>
+  <p>Your name feels calm.</p>
+</div>
+
+<div class="screen" id="s3">
+  <h2>Happy Birthday 🎉</h2>
+  <p>This day is yours.</p>
+</div>
+
+<div class="screen" id="s4">
+  <p>Long-press the cake 🎂</p>
+  <div class="cake" id="cake">🎂</div>
+</div>
+
+<div class="screen" id="s5">
+  <div id="wishes"></div>
+</div>
+
+<div class="screen" id="s6">
+  <h2>💖</h2>
+  <p>Some things are felt, not said.</p>
+  <p id="lastLine" style="opacity:0; transition:opacity 1.5s;">
+    And I hope you never forget how special you are 🌸
+  </p>
+  <p style="opacity:0.6;margin-top:10px;">— Rishik</p>
+  <div class="hint" onclick="location.reload()">Replay ✨</div>
+</div>
+
+<script>
+  let state = 0;
+  let pressTimer;
+  let nameTaps = 0;
+
+  function show(n) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById("s" + n).classList.add("active");
+  }
+
+  document.body.addEventListener("click", () => {
+    if (state < 4) {
+      state++;
+      show(state);
+    }
+  });
+
+  function secretTap() {
+    nameTaps++;
+    if (nameTaps === 3) {
+      const msg = document.createElement("div");
+      msg.className = "wish";
+      msg.innerText = "You make ordinary moments special 💖";
+      document.getElementById("s2").appendChild(msg);
+    }
+  }
+
+  const cake = document.getElementById("cake");
+
+  cake.addEventListener("touchstart", () => {
+    pressTimer = setTimeout(cutCake, 600);
+  });
+  cake.addEventListener("touchend", () => clearTimeout(pressTimer));
+  cake.addEventListener("touchmove", () => clearTimeout(pressTimer));
+
+  function cutCake() {
+    cake.classList.add("cut");
+    state = 5;
+    show(5);
+
+    let msgs = [
+      "Stay kind 🌷",
+      "Keep smiling ✨",
+      "Believe in yourself 💫",
+      "Good things are coming 🌙"
+    ];
+
+    // shuffle wishes
+    msgs = msgs.sort(() => Math.random() - 0.5);
+
+    msgs.forEach((m, i) => {
+      setTimeout(() => {
+        const d = document.createElement("div");
+        d.className = "wish";
+        d.innerText = m;
+        document.getElementById("wishes").appendChild(d);
+      }, i * 900);
+    });
+
+    setTimeout(() => {
+      state = 6;
+      show(6);
+      setTimeout(() => {
+        document.getElementById("lastLine").style.opacity = 1;
+      }, 2000);
+    }, msgs.length * 900 + 1400);
+  }
+</script>
+
+</body>
+</html>
