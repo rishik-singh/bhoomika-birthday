@@ -145,13 +145,13 @@
 </div>
 
 <div class="screen" id="s2" onclick="secretTap()">
-  <div class="name">BHOOMIKA</div>
-  <p>Your name feels calm.</p>
+  <div class="name">BHOOMIKA JAATNI JI 🌻</div>
+  <p>Tera naam ghana cute hai</p>
 </div>
 
 <div class="screen" id="s3">
-  <h2>Happy Birthday 🎉</h2>
-  <p>This day is yours.</p>
+  <h2>Happiest Birthday 🎉</h2>
+  <p>Ye ek din kya har ek din tera hai</p>
 </div>
 
 <div class="screen" id="s4">
@@ -165,7 +165,7 @@
 
 <div class="screen" id="s6">
   <h2>💖</h2>
-  <p>Some things are felt, not said.</p>
+  <p>Bahot mehnat se banaya hai ye (1.5 hr lagkar)</p>
 
   <p id="moodLine" style="opacity:0; transition:opacity 1.2s;"></p>
 
@@ -225,10 +225,10 @@
     show(5);
 
     let msgs = [
-      "Stay kind 🌷",
-      "Keep smiling ✨",
-      "Believe in yourself 💫",
-      "Good things are coming 🌙"
+      "Tu rahiyo kind hamesha 🌷",
+      "Hamesha muskurati rahna ✨",
+      "Bharosa hai tere pe billi 💫",
+      "Good things are coming; ye saal toh🌙"
     ];
 
     msgs = msgs.sort(() => Math.random() - 0.5);
@@ -249,11 +249,11 @@
       /* ✅ Mood-based message (FIXED) */
       setTimeout(() => {
         const hour = new Date().getHours();
-        let moodText = "Hope today feels kind 💖";
+        let moodText = "ummed hai accha laga hoga 💖";
 
-        if (hour >= 5 && hour < 12) moodText = "Hope your day starts gently 🌤️";
-        else if (hour >= 12 && hour < 18) moodText = "Hope your afternoon feels light ☁️";
-        else moodText = "Some nights are meant to feel slow 🌙";
+        if (hour >= 5 && hour < 12) moodText = "subah khola hai toh good morning billi 🌤️";
+        else if (hour >= 12 && hour < 18) moodText = "din me khola hai toh bahar aaja momos khane ☁️";
+        else moodText = "raat me khola hai toh soja bauni billi 🌙";
 
         const moodLine = document.getElementById("moodLine");
         moodLine.innerText = moodText;
@@ -270,3 +270,4 @@
 
 </body>
 </html>
+
