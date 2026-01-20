@@ -90,7 +90,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Floating elements */
+  /* Floating ambience */
   .float {
     position: absolute;
     bottom: -20px;
@@ -102,6 +102,17 @@
 
   @keyframes rise {
     to { transform: translateY(-120vh); }
+  }
+
+  /* Progress dots */
+  #progress {
+    position: fixed;
+    bottom: 14px;
+    width: 100%;
+    text-align: center;
+    opacity: 0.4;
+    font-size: 14px;
+    letter-spacing: 6px;
   }
 </style>
 </head>
@@ -155,6 +166,7 @@
 <div class="screen" id="s6">
   <h2>💖</h2>
   <p>Some things are felt, not said.</p>
+  <p id="moodLine" style="opacity:0.7;"></p>
   <p id="lastLine" style="opacity:0; transition:opacity 1.5s;">
     And I hope you never forget how special you are 🌸
   </p>
@@ -162,14 +174,21 @@
   <div class="hint" onclick="location.reload()">Replay ✨</div>
 </div>
 
+<!-- Progress -->
+<div id="progress">● ○ ○ ○ ○ ○ ○</div>
+
 <script>
   let state = 0;
   let pressTimer;
   let nameTaps = 0;
+  const TOTAL = 6;
 
   function show(n) {
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     document.getElementById("s" + n).classList.add("active");
+
+    document.getElementById("progress").innerText =
+      "●".repeat(n+1) + "○".repeat(TOTAL-n);
   }
 
   document.body.addEventListener("click", () => {
@@ -209,7 +228,6 @@
       "Good things are coming 🌙"
     ];
 
-    // shuffle wishes
     msgs = msgs.sort(() => Math.random() - 0.5);
 
     msgs.forEach((m, i) => {
@@ -224,13 +242,24 @@
     setTimeout(() => {
       state = 6;
       show(6);
+
       setTimeout(() => {
         document.getElementById("lastLine").style.opacity = 1;
       }, 2000);
+
     }, msgs.length * 900 + 1400);
   }
+
+  // Mood-based message
+  const hour = new Date().getHours();
+  let moodText = "Hope today feels kind 💖";
+
+  if (hour >= 5 && hour < 12) moodText = "Hope your day starts gently 🌤️";
+  else if (hour >= 12 && hour < 18) moodText = "Hope your afternoon feels light ☁️";
+  else moodText = "Some nights are meant to feel slow 🌙";
+
+  document.getElementById("moodLine").innerText = moodText;
 </script>
 
 </body>
 </html>
-
